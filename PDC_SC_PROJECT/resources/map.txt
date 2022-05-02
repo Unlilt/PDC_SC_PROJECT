@@ -1,0 +1,41 @@
+Intro: 
+You are a brave hero who has been captured by the evil emperor Gnosis! Thrown into the dungeon of his castle to rot, you plot an escape.
+One day, a large explosion rock the castle, rubble falling into your chamber. The force has knocked loose the cage door from the stone!
+This is your chance!
+Onward brave hero!
+end
+1: 
+The Interior of this room is empty, save for a single stone slab pushed into a corner. A bed.
+Light streams through slotted iron bars in a window.
+The door is slightly ajar.
+end
+2:
+You are in a dark hallway. There are no windows, only the faint light from torches lining the stone walls. 
+A massive pair of worn statues in a misty swamp marks the entrance to the next room. 
+Beyond the pair of worn statues lies a massive, filthy room. It's covered in broken pottery, large bones and crawling insects.
+The torches allow you to see broken vats and flasks, forgotten and ravaged by time itself.
+end
+3:
+The hair on the back of your neck stands as you enter a homely hexagonal room. 
+Blood stains line the reinforced metallic walls. Blood stains cover the fractured floor. 
+Moss that lines the wall seems to be glowing, giving off a mysterious light. 
+There are no other exits, but there is a large crack in the wall that leads to another room.
+end
+4:
+As you squeeze through the crack in the wall, you enter a smaller, dilapidated room.
+There are bookshelves lining the walls, and a desk in the centre. A broken oil lamp lies discarded on the stone floor.
+You can feel eyes on your, but there is no one there.
+end
+5:
+Moving past the scattered papers and the broken lamp, you find a door. It is half behind a fallen bookcase.
+Squeezing through the small opening, you find yourself in a large, ornate room. A ballroom perhaps?
+The curtains are torn from the windows, some glass panes shattered. The moonlight streaks in, casting shadows on the portraits opposite.
+The stares on your back intensify. A large door stands at the end of the room. Decorated with gold and silver vines, the door to the throne room.
+You feel your journey is coming to an end.
+6:
+Bursting through the door, you come to a stop in the middle of a marble floor. Pillars surround you, one in each corner of the room.
+A giant chandelier hangs in the centre, all the candles lit. Ahead of you is a throne. A red velvet chair trimmed in gold, wrapped in silver vines. 
+Atop the chair sits a man. Towering above you, in purple robes, an ornate mask of iron adorns his face. The Evil Emperor Gnosis!
+He stands, robes billowing as  he takes a single step forward. The candles on the chandelier go out. The only source of light now being the moon.
+It illuminates his mask, and the green eyes staring from beneath it. He does not speak, but raises a hand. And with that, Gnosis lunges at you!
+end
