@@ -5,19 +5,27 @@
  */
 package game;
 
+import java.awt.Dimension;
+import javax.swing.JFrame;
+
 /**
  * @author Jade Thompson-Tavai
  * Student ID: 20108594
  */
-public class Main {
+public class Main extends JFrame{
 
     /**Jade
      * @param args the command line arguments
      */
     public static void main(String[] args) {
             GUI gameGui = new GUI();
-//            Game game = new Game();
-            
+            //Create/initialize GUI
+            JFrame f = new JFrame("Evil Emperor Oz Rising!");
+            f.setPreferredSize(new Dimension(500, 500));
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f.setContentPane(gameGui);
+            f.pack();
+            f.setVisible(true);
     }
     
 }
