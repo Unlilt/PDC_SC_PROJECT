@@ -23,6 +23,7 @@ public class GUI extends JPanel {
     public GUI(){
        drawPanel = new DrawPanel();
        JPanel panel = new JPanel();
+       panel.add(drawPanel);
        
        super.add(panel, BorderLayout.CENTER);
     }
@@ -31,7 +32,7 @@ public class GUI extends JPanel {
         public DrawPanel()
         {
             super.setPreferredSize(new Dimension(600,600));
-            super.setBackground(Color.RED);
+            super.setBackground(Color.BLACK);
         }
 }
 }
