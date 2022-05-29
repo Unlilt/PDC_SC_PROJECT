@@ -9,8 +9,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
@@ -22,10 +20,8 @@ import java.util.logging.Logger;
  */
 class Map {
    public static ArrayList<Room> map = new ArrayList<Room>();
-        public static DBManager db;
-        public static Connection conn;
      
-        public static String getRoomDesc(int key) throws SQLException {
+        public static String getRoomDesc(int key) {
             Room room = map.get(key);
             String desc = room.getDesc();
                   return desc;

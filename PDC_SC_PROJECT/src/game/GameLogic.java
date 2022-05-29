@@ -6,6 +6,7 @@
 package game;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -64,7 +65,9 @@ public class GameLogic {
         scanner.next();
     }
     
-    public static void Start(){
+    public static void Start() throws SQLException{
+        //load map
+        Map.loadMap();
         //print title screen
         clearConsole();
         printPartition(40);

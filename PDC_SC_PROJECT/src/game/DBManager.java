@@ -9,6 +9,7 @@ package game;
  * @author jadey
  */
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -91,4 +92,12 @@ public final class DBManager {
         }
     }
 
-}
+    public boolean ifTableExists(String tableName) throws SQLException {
+    DatabaseMetaData meta = conn.getMetaData();
+    ResultSet resultSet = meta.getTables(null, null, tableName, new String[] {"TABLE"});
+    
+    return resultSet.next();
+        }
+    }
+
+

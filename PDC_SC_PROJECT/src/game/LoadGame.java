@@ -11,6 +11,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,9 +24,10 @@ import java.util.logging.Logger;
  * Student ID: 20108594
  */
 public class LoadGame {
-
+   public static Connection conn;
+    public static DBManager db;
     //if found save ask for confirmation to load
-   static Player loadPrompt(File file, String name) {
+   static Player loadPrompt(File file, String name) throws SQLException {
        Player pc;
         System.out.println("We found a save file with this name. Load?");
         System.out.println("(1) Yes!");
@@ -30,7 +35,7 @@ public class LoadGame {
         int input = getInput("->", 2);
         if(input == 1)
             //load confirmed
-            pc = loadSave(file, name);
+            pc = loadSave(name);
         else{
             //wants to start new game. Print warning
             System.out.println("If you save upon exit, you will overwrite the current save.");
@@ -40,53 +45,59 @@ public class LoadGame {
         return pc;
     }
 
-    static Player loadSave(File file, String name) {
+    public static Player loadSave(String name) throws SQLException {
         Player pc = new Player(name);          
-            try (BufferedReader inStream = new BufferedReader(new FileReader(file))) {
-                String line = null;
-                while((line=inStream.readLine())!=null){
-                    Scanner sc = new Scanner(line);
-                    sc.useDelimiter(",,*|\\. *|: *|\\*\\**");             
-                    while(sc.hasNext()){                                                      
-                        String next = sc.next();
-                        switch(next){
-                            
-                            case "NAME":
-                                next = sc.next();
-                                pc.name = (next);
-                                System.out.println(pc.name);
-                                break;
-
-                            case "MAXHP":
-                                next = sc.next();
-                                pc.maxHP = (Integer.parseInt(next));
-
-                                break;
-                            case "HP":
-                                next = sc.next();
-                                pc.hp = (Integer.parseInt(next));
-                                break;
-                            case "XP":
-                                next = sc.next();
-                                pc.xp = (Integer.parseInt(next));
-                                break;
-                            case "ID":
-                            next = sc.next();
-                            pc.setId(next);
-                            break;
-                            case "ROOMCOUNT":
-                                next = sc.next();
-                                pc.roomCount = Integer.parseInt(next);
-                                break;
-                            default:
-                                break;
-                        }
-                    
-                }}
-       } catch (FileNotFoundException ex) {
-           Logger.getLogger(LoadGame.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (IOException ex) {
-           Logger.getLogger(LoadGame.class.getName()).log(Level.SEVERE, null, ex);
-       }
+//            try (BufferedReader inStream = new BufferedReader(new FileReader(file))) {
+//                String line = null;
+//                while((line=inStream.readLine())!=null){
+//                    Scanner sc = new Scanner(line);
+//                    sc.useDelimiter(",,*|\\. *|: *|\\*\\**");             
+//                    while(sc.hasNext()){                                                      
+//                        String next = sc.next();
+//                        switch(next){
+//                            
+//                            case "NAME":
+//                                next = sc.next();
+//                                pc.name = (next);
+//                                System.out.println(pc.name);
+//                                break;
+//
+//                            case "MAXHP":
+//                                next = sc.next();
+//                                pc.maxHP = (Integer.parseInt(next));
+//
+//                                break;
+//                            case "HP":
+//                                next = sc.next();
+//                                pc.hp = (Integer.parseInt(next));
+//                                break;
+//                            case "XP":
+//                                next = sc.next();
+//                                pc.xp = (Integer.parseInt(next));
+//                                break;
+//                            case "ID":
+//                            next = sc.next();
+//                            pc.setId(next);
+//                            break;
+//                            case "ROOMCOUNT":
+//                                next = sc.next();
+//                                pc.roomCount = Integer.parseInt(next);
+//                                break;
+//                            default:
+//                                break;
+//                        }
+//                    
+//                }}
+//       } catch (FileNotFoundException ex) {
+//           Logger.getLogger(LoadGame.class.getName()).log(Level.SEVERE, null, ex);
+//       } catch (IOException ex) {
+//           Logger.getLogger(LoadGame.class.getName()).log(Level.SEVERE, null, ex);
+//       }
+            conn = db.getConnection();
+            Statement st = conn.createStatement();
+            String getPlayer = "SELECT * FROM PLAYER WHERE NAME = " + name;
+            ResultSet rs = st.executeQuery(getPlayer);
+            pc.hp = rs.getInt("HP");
+        
             return pc;
     }}
