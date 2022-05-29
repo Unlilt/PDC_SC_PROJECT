@@ -6,6 +6,9 @@
 package game;
 
 import static game.GameLogic.isRunning;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Random;
 
 /**
@@ -13,7 +16,9 @@ import java.util.Random;
  * Student ID: 20108594
  */
 public class Player extends Character{
-
+    public static Connection conn;
+    public DBManager db;
+    
     static void death(String killer) {
         GameLogic.clearConsole();
         System.out.println("You were killed by the " + killer + "! Evil Emperor Gnosis remains!");
@@ -36,11 +41,24 @@ public class Player extends Character{
     Random rand = new Random();
 
     
-    public Player(String name) {
+    public Player(String name) throws SQLException {
        super(name, 100, 0, "Player");
        this.roomCount = 0;
-    
-    }
+       db = new DBManager();
+        conn = db.getConnection();
+        Statement st = conn.createStatement();
+        if(!db.ifTableExists("PLAYER")){
+            createPlayerTable();
+        }
+        else{
+            
+            String addPlayer = "INSERT INTO PLAYER VALUES(" + name + ", 100, 0)";
+            st.execute(addPlayer);
+            st.close();
+        }
+        
+        conn.close();
+        }
 
    
     
@@ -59,6 +77,17 @@ public class Player extends Character{
         System.out.println("Your hp is restored by " + healed + " points!");
         GameLogic.anyKeyToContinue();
     }}
+
+    private void createPlayerTable() throws SQLException {
+        db = new DBManager();
+        conn = db.getConnection();
+        Statement st = conn.createStatement();
+        
+        String createTable = "CREATE TABLE PLAYER(NAME VARCHAR(50), HP INT, XP INT)";
+        st.execute(createTable);
+        st.close();
+        db.closeConnections();
+    }
    
     
 }
