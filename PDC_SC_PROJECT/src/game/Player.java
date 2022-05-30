@@ -7,6 +7,7 @@ package game;
 
 import static game.GameLogic.isRunning;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -48,14 +49,15 @@ public class Player extends Character{
         db = new DBManager();
         conn = db.getConnection();
         Statement st = conn.createStatement();
+       
         if(!db.ifTableExists("PLAYER")){
             createPlayerTable();
         }
       
             
-            String addPlayer = "INSERT INTO PLAYER VALUES(" + name.toUpperCase() + ",100,100, 0, 0)";
+            String addPlayer = "INSERT INTO PLAYER (NAME, HP, MAXHP, XP, ROOMNO) VALUES(" + name.toUpperCase() + ",100,100, 0, 0)";
             st.execute(addPlayer);
-        
+        ResultSet rs = st.executeQuery("SELECT * FROM PLAYER");
         st.close();
         conn.close();
         db.closeConnections();
@@ -93,9 +95,10 @@ public class Player extends Character{
     public static boolean ifPlayerExists(String name) throws SQLException{
         db = new DBManager();
         conn = db.getConnection();
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT * FROM PLAYER WHERE NAME = " + name.toUpperCase());
-        
+     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM PLAYER WHERE NAME = ?");
+     stmt.setString(1, name);
+     ResultSet rs = stmt.executeQuery();
+     
         return rs.next();
     }
     
