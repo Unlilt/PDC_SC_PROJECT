@@ -54,9 +54,9 @@ public class Player extends Character{
             createPlayerTable();
         }
       
-            
-            String addPlayer = "INSERT INTO PLAYER (NAME, HP, MAXHP, XP, ROOMNO) VALUES(" + name.toUpperCase() + ",100,100, 0, 0)";
-            st.execute(addPlayer);
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO PLAYER (NAME, HP, MAXHP, XP, ROOMNO) VALUES(?,100,100, 0, 0)");
+            stmt.setString(1, name);
+            stmt.execute();
         ResultSet rs = st.executeQuery("SELECT * FROM PLAYER");
         st.close();
         conn.close();
