@@ -102,7 +102,7 @@ public class GameLogic {
         gameLoop();
     }
     
-    public static void gameLoop(){
+    public static void gameLoop() throws SQLException{
         while(isRunning){
             
             printMenu();

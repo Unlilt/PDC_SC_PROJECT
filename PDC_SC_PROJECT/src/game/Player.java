@@ -7,6 +7,7 @@ package game;
 
 import static game.GameLogic.isRunning;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
@@ -17,7 +18,7 @@ import java.util.Random;
  */
 public class Player extends Character{
     public static Connection conn;
-    public DBManager db;
+    public static DBManager db;
     
     static void death(String killer) {
         GameLogic.clearConsole();
@@ -44,20 +45,20 @@ public class Player extends Character{
     public Player(String name) throws SQLException {
        super(name, 100, 0, "Player");
        this.roomCount = 0;
-       db = new DBManager();
+        db = new DBManager();
         conn = db.getConnection();
         Statement st = conn.createStatement();
         if(!db.ifTableExists("PLAYER")){
             createPlayerTable();
         }
-        else{
+      
             
-            String addPlayer = "INSERT INTO PLAYER VALUES(" + name + ", 100, 0)";
+            String addPlayer = "INSERT INTO PLAYER VALUES(" + name.toUpperCase() + ",100,100, 0, 0)";
             st.execute(addPlayer);
-            st.close();
-        }
         
+        st.close();
         conn.close();
+        db.closeConnections();
         }
 
    
@@ -83,11 +84,19 @@ public class Player extends Character{
         conn = db.getConnection();
         Statement st = conn.createStatement();
         
-        String createTable = "CREATE TABLE PLAYER(NAME VARCHAR(50), HP INT, XP INT)";
+        String createTable = "CREATE TABLE PLAYER(NAME VARCHAR(50), HP INT, MAXHP INT, XP INT, ROOMNO INT)";
         st.execute(createTable);
         st.close();
         db.closeConnections();
     }
    
+    public static boolean ifPlayerExists(String name) throws SQLException{
+        db = new DBManager();
+        conn = db.getConnection();
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery("SELECT * FROM PLAYER WHERE NAME = " + name.toUpperCase());
+        
+        return rs.next();
+    }
     
 }
