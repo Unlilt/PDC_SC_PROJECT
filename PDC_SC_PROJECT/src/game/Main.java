@@ -21,12 +21,12 @@ public class Main extends JFrame{
     public static void main(String[] args) throws SQLException {
             GUI gameGui = new GUI();
             //Create/initialize GUI
-            JFrame f = new JFrame("Evil Emperor Oz Rising!");
-            f.setPreferredSize(new Dimension(500, 500));
-            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            f.setContentPane(gameGui);
-            f.pack();
-            f.setVisible(true);
+            JFrame window = new JFrame("Evil Emperor Oz Rising!");
+            window.setPreferredSize(new Dimension(500, 500));
+            window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            window.setContentPane(gameGui);
+            window.pack();
+            window.setVisible(true);
             
             GameLogic gl = new GameLogic();
             gl.Start();

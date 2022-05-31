@@ -11,6 +11,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -20,7 +21,7 @@ import javax.swing.JPanel;
 public class GUI extends JPanel {
     
     private final DrawPanel drawPanel;
-
+    JFrame window;
 
     public GUI(){
        drawPanel = new DrawPanel();

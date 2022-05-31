@@ -7,16 +7,12 @@ package game;
 
 import static game.GameLogic.getInput;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Jade Thompson-Tavai
@@ -25,7 +21,7 @@ import java.util.logging.Logger;
 public class SaveGame {
     public static DBManager db;
     public static Connection conn;
-     static void savePrompt(Player player) throws SQLException {
+     static boolean  savePrompt(Player player) throws SQLException {
          db = new DBManager();
          conn = db.getConnection();
           String name = player.getName();
@@ -35,20 +31,27 @@ public class SaveGame {
                 System.out.println("You have an existing save. Overwrite it?");
                 System.out.println("(1) Yes I'm sure!");
                 System.out.println("(2) No, exit without saving.");
+                //Input for testing
+//                int input = 1;
                  int input = getInput("->", 2);
                         if(input == 1)
 //                            saveInfoInitialize(player);
                             saveGame(player);
                         System.out.println("Thanks for Playing!");
+                         conn.close();
+         db.closeConnections();
+         return true;
             }
          else{
 //                    saveInfoInitialize(player);
 //                                saveGame(file); 
                                 System.out.println("Thanks for Playing!");
                                 GameLogic.isRunning = false;
-}
-         conn.close();
+                                 conn.close();
          db.closeConnections();
+}
+         return false;
+        
     }
           protected static Map<String, String> playerInfo = new HashMap<>();
 
@@ -71,16 +74,42 @@ public class SaveGame {
         db = new DBManager();
         conn = db.getConnection();
         Statement st = conn.createStatement();
-        
+        PreparedStatement pstmt;
         if(Player.ifPlayerExists(pc.name)){
-        String updatePlayer = "UPDATE PLAYER SET HP=" + pc.hp+", MAXHP="+pc.maxHP+",ROOMNO= " + pc.roomCount +" WHERE NAME=" + pc.name.toUpperCase();
-        st.execute(updatePlayer);
+            /*set indexes
+            hp = 1
+            maxhp = 2
+            roomno = 3
+            xp = 4
+            name = 5
+            */
+            pstmt = conn.prepareStatement("UPDATE PLAYER SET HP=?, MAXHP=?, ROOMNO=?, XP=? WHERE NAME=?");
+            pstmt.setInt(1, pc.hp);
+            pstmt.setInt(2, pc.maxHP);
+            pstmt.setInt(3, pc.roomCount);
+            pstmt.setInt(4, pc.xp);
+            pstmt.setString(5, pc.name.toUpperCase());
+
+
         }
         else{
-            String addPlayer = "INSERT INTO PLAYER VALUES ("+ pc.name.toUpperCase()+", " +pc.hp+", "+ pc.xp+", "+ pc.roomCount+")";
-            st.execute(addPlayer);
+             /*set indexes
+            name = 1
+            hp = 2
+            maxhp = 3
+            roomno = 4
+            xp = 5
+            */
+            pstmt = conn.prepareStatement("INSERT INTO PLAYER VALUES (?, ?, ?, ?, ?)");
+           pstmt.setString(1, pc.name.toUpperCase());
+           pstmt.setInt(2, pc.hp);
+           pstmt.setInt(3, pc.maxHP);
+           pstmt.setInt(4, pc.roomCount);
+           pstmt.setInt(5, pc.xp);
+           pstmt.execute();
+
         }
-        st.close();
+        pstmt.close();
         conn.close();
         db.closeConnections();
             

@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -46,7 +47,7 @@ public class LoadGame {
     }
 
     public static Player loadSave(String name) throws SQLException {
-        Player pc = new Player(name);          
+             
 //            try (BufferedReader inStream = new BufferedReader(new FileReader(file))) {
 //                String line = null;
 //                while((line=inStream.readLine())!=null){
@@ -93,11 +94,20 @@ public class LoadGame {
 //       } catch (IOException ex) {
 //           Logger.getLogger(LoadGame.class.getName()).log(Level.SEVERE, null, ex);
 //       }
+            Player pc = new Player(name);
+            db = new DBManager();
             conn = db.getConnection();
-            Statement st = conn.createStatement();
-            String getPlayer = "SELECT * FROM PLAYER WHERE NAME = " + name;
-            ResultSet rs = st.executeQuery(getPlayer);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM PLAYER WHERE NAME = ?");
+            pstmt.setString(1, name.toUpperCase());
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
             pc.hp = rs.getInt("HP");
-        
+            pc.maxHP = rs.getInt("MAXHP");
+            pc.roomCount = rs.getInt("ROOMNO");
+            pc.xp = rs.getInt("XP");
+            }
+            pstmt.close();
+            conn.close();
+            db.closeConnections();
             return pc;
     }}
