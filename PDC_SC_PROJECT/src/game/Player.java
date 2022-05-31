@@ -48,17 +48,19 @@ public class Player extends Character{
        this.roomCount = 0;
         db = new DBManager();
         conn = db.getConnection();
-        Statement st = conn.createStatement();
        
         if(!db.ifTableExists("PLAYER")){
             createPlayerTable();
         }
       
+        if(!ifPlayerExists(name)){
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO PLAYER (NAME, HP, MAXHP, XP, ROOMNO) VALUES(?,100,100, 0, 0)");
-            stmt.setString(1, name);
+            stmt.setString(1, name.toUpperCase());
             stmt.execute();
-        ResultSet rs = st.executeQuery("SELECT * FROM PLAYER");
-        st.close();
+            stmt.close();
+        }
+        
+            
         conn.close();
         db.closeConnections();
         }
