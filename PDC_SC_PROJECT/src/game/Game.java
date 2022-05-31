@@ -5,6 +5,8 @@
  */
 package game;
 
+import java.sql.SQLException;
+
 /**
  * @author Jade Thompson-Tavai
  * Student ID: 20108594
@@ -12,7 +14,7 @@ package game;
 public class Game {
     //Initializing
     
-    public Game(){
+    public Game() throws SQLException{
         Map.loadMap();
         GameLogic.Start();
     }
