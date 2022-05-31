@@ -69,11 +69,10 @@ public class SaveGame {
 //    }
 
 
-      private static void saveGame(Player pc) throws SQLException {
+      private static synchronized void saveGame(Player pc) throws SQLException {
  
         db = new DBManager();
         conn = db.getConnection();
-        Statement st = conn.createStatement();
         PreparedStatement pstmt;
         if(Player.ifPlayerExists(pc.name)){
             /*set indexes
@@ -112,7 +111,7 @@ public class SaveGame {
         pstmt.close();
         conn.close();
         db.closeConnections();
-            
+        GameLogic.isRunning = false;
     }
       
 }

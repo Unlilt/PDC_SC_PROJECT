@@ -5,20 +5,35 @@
  */
 package game;
 
+import java.awt.Dimension;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Jade Thompson-Tavai
  * Student ID: 20108594
  */
-public class GameLogic {
+public class GameLogic implements Runnable {
     static Scanner scanner = new Scanner(System.in);
     static Player player;
     public static boolean isRunning;
+    
+    public GameLogic(){
+              GUI gameGui = new GUI();
+            //Create/initialize GUI
+            JFrame window = new JFrame("Evil Emperor Oz Rising!");
+            window.setPreferredSize(new Dimension(500, 500));
+            window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            window.setContentPane(gameGui);
+            window.pack();
+            window.setVisible(true);
+    }
     
     //method to get user input from console
     public static int getInput(String prompt, int choices) {
@@ -67,7 +82,7 @@ public class GameLogic {
     
     public static void Start() throws SQLException{
         //load map
-        Map.loadMap();
+//        Map.loadMap();
         //print title screen
         clearConsole();
         printPartition(40);
@@ -226,4 +241,14 @@ public class GameLogic {
             return name;
 
     } 
+
+    @Override
+    public void run() {
+        try {
+            //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            Start();
+        } catch (SQLException ex) {
+            Logger.getLogger(GameLogic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     }

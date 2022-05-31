@@ -16,7 +16,9 @@ public class Game {
     
     public Game() throws SQLException{
         Map.loadMap();
-        GameLogic.Start();
+        GameLogic gl = new GameLogic();
+        Thread thread = new Thread(gl);
+        thread.start();
     }
 
   
