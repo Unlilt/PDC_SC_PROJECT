@@ -5,7 +5,6 @@
  */
 package game;
 
-import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.JFrame;
 
@@ -19,17 +18,10 @@ public class Main extends JFrame{
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-            GUI gameGui = new GUI();
-            //Create/initialize GUI
-            JFrame window = new JFrame("Evil Emperor Oz Rising!");
-            window.setPreferredSize(new Dimension(500, 500));
-            window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            window.setContentPane(gameGui);
-            window.pack();
-            window.setVisible(true);
-            
-            GameLogic gl = new GameLogic();
-            gl.Start();
+      
+         Game game = new Game();   
+//           
+           
     }
     
 }
