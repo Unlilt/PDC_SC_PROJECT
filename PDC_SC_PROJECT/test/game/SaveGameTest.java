@@ -38,16 +38,13 @@ public class SaveGameTest {
     }
 
     /**
-     * Test of savePrompt method, of class SaveGame.
+     * Test of saveGame method, of class SaveGame.
      */
     @Test
-    public void testSavePrompt() throws Exception {
-        
-        System.out.println("savePrompt");
-        Player player = new Player("Kate");
-        SaveGame.savePrompt(player);
-        boolean expected = true;
-        
+    public void testSaveGame() throws Exception {
+        System.out.println("saveGame");
+        Player pc = new Player("Test");
+        SaveGame.saveGame(pc);
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
     }
