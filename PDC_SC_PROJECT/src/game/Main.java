@@ -19,7 +19,7 @@ public class Main extends JFrame{
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-      
+   
          Game game = new Game();   
 //           
            
