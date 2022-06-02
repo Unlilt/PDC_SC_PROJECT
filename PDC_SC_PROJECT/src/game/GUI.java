@@ -5,6 +5,8 @@
  */
 package game;
 
+import static game.SaveGame.g;
+import java.awt.TextArea;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +16,8 @@ import java.util.logging.Logger;
  * @author jadey
  */
 public class GUI extends javax.swing.JFrame {
+
+    
 
     
     Player pc;
@@ -31,6 +35,7 @@ public class GUI extends javax.swing.JFrame {
         verifyLoad.setVisible(false);
         battle.setVisible(false);
         saveGame.setVisible(false);
+        restartPanel.setVisible(false);
 
 
         
@@ -85,11 +90,15 @@ public class GUI extends javax.swing.JFrame {
         yesBtnLoad = new javax.swing.JButton();
         noBtnLoad = new javax.swing.JButton();
         saveGame = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        saveLabel = new javax.swing.JLabel();
         saveText = new java.awt.TextArea();
         yesBtnSave = new javax.swing.JButton();
         noBtnSave = new javax.swing.JButton();
         contBtnSave = new javax.swing.JButton();
+        restartPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        yesBtnSaveRestart = new javax.swing.JButton();
+        noBtnRestartSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 500, 500));
@@ -533,7 +542,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(verifyLoadLayout.createSequentialGroup()
                 .addGap(111, 111, 111)
                 .addComponent(jScrollPaneLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(verifyLoadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yesBtnLoad)
                     .addComponent(noBtnLoad))
@@ -573,9 +582,9 @@ public class GUI extends javax.swing.JFrame {
 
         saveGame.setMinimumSize(new java.awt.Dimension(500, 500));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Saving");
+        saveLabel.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        saveLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        saveLabel.setText("Saving");
 
         saveText.setText("Do you want to save the game?");
 
@@ -599,24 +608,24 @@ public class GUI extends javax.swing.JFrame {
         saveGame.setLayout(saveGameLayout);
         saveGameLayout.setHorizontalGroup(
             saveGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, saveGameLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(175, 175, 175))
             .addGroup(saveGameLayout.createSequentialGroup()
-                .addGap(88, 88, 88)
+                .addContainerGap(53, Short.MAX_VALUE)
+                .addComponent(saveText, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, saveGameLayout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(yesBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(noBtnSave)
+                .addGap(73, 73, 73))
+            .addGroup(saveGameLayout.createSequentialGroup()
                 .addGroup(saveGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(saveGameLayout.createSequentialGroup()
-                        .addComponent(saveText, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(143, 143, 143)
+                        .addComponent(saveLabel))
                     .addGroup(saveGameLayout.createSequentialGroup()
-                        .addComponent(yesBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addComponent(noBtnSave)
-                        .addGap(104, 104, 104))))
-            .addGroup(saveGameLayout.createSequentialGroup()
-                .addGap(186, 186, 186)
-                .addComponent(contBtnSave)
+                        .addGap(175, 175, 175)
+                        .addComponent(contBtnSave)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -625,13 +634,13 @@ public class GUI extends javax.swing.JFrame {
         saveGameLayout.setVerticalGroup(
             saveGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(saveGameLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jLabel1)
-                .addGap(25, 25, 25)
-                .addComponent(saveText, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(26, 26, 26)
+                .addComponent(saveLabel)
+                .addGap(19, 19, 19)
+                .addComponent(saveText, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addComponent(contBtnSave)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(saveGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yesBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(noBtnSave))
@@ -639,6 +648,51 @@ public class GUI extends javax.swing.JFrame {
         );
 
         saveGameLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {contBtnSave, noBtnSave, yesBtnSave});
+
+        restartPanel.setMinimumSize(new java.awt.Dimension(500, 500));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Do you want to save current progress?");
+
+        yesBtnSaveRestart.setText("Yes");
+        yesBtnSaveRestart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yesBtnSaveRestartActionPerformed(evt);
+            }
+        });
+
+        noBtnRestartSave.setText("No");
+        noBtnRestartSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noBtnRestartSaveActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout restartPanelLayout = new javax.swing.GroupLayout(restartPanel);
+        restartPanel.setLayout(restartPanelLayout);
+        restartPanelLayout.setHorizontalGroup(
+            restartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(restartPanelLayout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addGroup(restartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(restartPanelLayout.createSequentialGroup()
+                        .addComponent(yesBtnSaveRestart)
+                        .addGap(88, 88, 88)
+                        .addComponent(noBtnRestartSave))
+                    .addComponent(jLabel1))
+                .addContainerGap(106, Short.MAX_VALUE))
+        );
+        restartPanelLayout.setVerticalGroup(
+            restartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(restartPanelLayout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(jLabel1)
+                .addGap(141, 141, 141)
+                .addGroup(restartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(yesBtnSaveRestart)
+                    .addComponent(noBtnRestartSave))
+                .addContainerGap(154, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -675,6 +729,11 @@ public class GUI extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(saveGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(restartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -708,6 +767,11 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(saveGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(restartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -774,6 +838,9 @@ public class GUI extends javax.swing.JFrame {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         };
         pc = GameLogic.player;
+        loadGame.setVisible(false);
+        setLoopPanel();
+        loopPanel.setVisible(true);
 
     }//GEN-LAST:event_contBtn1ActionPerformed
 
@@ -784,7 +851,10 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_loadGameBtnActionPerformed
 
     private void restartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartBtnActionPerformed
-        // TODO add your handling code here:
+        // move to restart panel
+        loopPanel.setVisible(false);
+        restartPanel.setVisible(true);
+
     }//GEN-LAST:event_restartBtnActionPerformed
 
     private void yesBtnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesBtnLoadActionPerformed
@@ -854,12 +924,27 @@ public class GUI extends javax.swing.JFrame {
        //move to save panel
         loopPanel.setVisible(false);
        saveGame.setVisible(true);
-        
+       contBtnSave.setVisible(false);
+       saveText.setVisible(true);
         
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void yesBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesBtnSaveActionPerformed
-        // TODO add your handling code here:
+        try {
+            if((Player.ifPlayerExists(name))){
+                String overwrite = "You have an existing save. Overwrite it?";
+                saveText.setText(overwrite);
+                yesBtnSave.setVisible(true);
+                noBtnSave.setVisible(true);
+            }
+            else{
+                SaveGame.saveGame(GameLogic.player);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         yesBtnSave.setVisible(false);
+        noBtnSave.setVisible(false);
     }//GEN-LAST:event_yesBtnSaveActionPerformed
 
     private void contBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contBtnSaveActionPerformed
@@ -870,6 +955,23 @@ public class GUI extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_contBtnSaveActionPerformed
+
+    private void yesBtnSaveRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesBtnSaveRestartActionPerformed
+        //move to save Panel
+        restartPanel.setVisible(false);
+        saveGame.setVisible(true);
+        contBtnSave.setVisible(false);
+          yesBtnSave.setVisible(true);
+        noBtnSave.setVisible(true);
+        
+
+    }//GEN-LAST:event_yesBtnSaveRestartActionPerformed
+
+    private void noBtnRestartSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noBtnRestartSaveActionPerformed
+        // move to titlePanel
+        restartPanel.setVisible(false);
+        titlePanel.setVisible(true);
+    }//GEN-LAST:event_noBtnRestartSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -940,12 +1042,15 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton newGameBtn;
     private javax.swing.JButton noBtnLoad;
     private javax.swing.JButton noBtnNew;
+    private javax.swing.JButton noBtnRestartSave;
     protected javax.swing.JButton noBtnSave;
     protected java.awt.Label playerStats;
     private javax.swing.JButton restartBtn;
+    private javax.swing.JPanel restartPanel;
     protected javax.swing.JButton runBtn;
     private javax.swing.JButton saveBtn;
     private javax.swing.JPanel saveGame;
+    private javax.swing.JLabel saveLabel;
     protected java.awt.TextArea saveText;
     protected javax.swing.JTextArea textArea;
     private java.awt.Label titleLabel;
@@ -955,6 +1060,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton yesBtnLoad;
     private javax.swing.JButton yesBtnNew;
     protected javax.swing.JButton yesBtnSave;
+    private javax.swing.JButton yesBtnSaveRestart;
     // End of variables declaration//GEN-END:variables
 
     private void confirmLoad() {
@@ -990,6 +1096,34 @@ public class GUI extends javax.swing.JFrame {
         battle.setVisible(true);
         battleEndedContinueBtn.setVisible(false);
     }
+    
+    static void bossBattle() {
+        String bossIntro = "This is it.\n";
+       
+            System.out.println("The final battle");
+            anyKeyToContinue();
+            System.out.println("(1) Yes! Bring it on!");
+            System.out.println("(2)NO! TAKE ME HOME!");
+            int input = getInput("->", 2);
+            if(input == 2){
+                clearConsole();
+                System.out.println("Silly " + player.getName() + ", you're the hero.");
+                anyKeyToContinue();
+                clearConsole();
+                System.out.println("You don't get a choice!");
+                anyKeyToContinue();
+
+            }
+            clearConsole();
+            System.out.println(Map.getRoomDesc(player.roomCount));
+            anyKeyToContinue();
+            Battle.finalBattle(player);
+            System.out.println("Thank you for Playing!");
+                    isRunning = false;
+
+    }
+
+   
 
 }
 

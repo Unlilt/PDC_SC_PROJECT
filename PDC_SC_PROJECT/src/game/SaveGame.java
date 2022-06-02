@@ -23,39 +23,40 @@ public class SaveGame {
     public static DBManager db;
     public static Connection conn;
     
-     static boolean  savePrompt(Player player) throws SQLException {
-         db = new DBManager();
-         conn = db.getConnection();
-          String name = player.getName();
-      
-         if((Player.ifPlayerExists(name))){
-                String overwrite = "You have an existing save. Overwrite it?";
-                g.saveText.setText(overwrite);
-                g.yesBtnSave.setVisible(true);
-                g.noBtnSave.setVisible(true);
+//     static boolean  savePrompt(Player player) throws SQLException {
+//         g = GameLogic.gameGui;
+//         db = new DBManager();
+//         conn = db.getConnection();
+//          String name = player.getName();
+//      
+//         if((Player.ifPlayerExists(name))){
+//                String overwrite = "You have an existing save. Overwrite it?";
+//                System.out.println(overwrite);
+//                g.saveText.setVisible(true);
+//                g.yesBtnSave.setVisible(true);
+//                g.noBtnSave.setVisible(true);
+//
+//            
+//     
+//         return true;
+//            }
+//         else{
+////                    saveInfoInitialize(player);
+//                                saveGame(player); 
+//                                System.out.println("Thanks for Playing!");
+//                                GameLogic.isRunning = false;
+//                                 conn.close();
+//         db.closeConnections();
+//}
+//         return false;
+//        
+//    }
 
-            
-         conn.close();
-         db.closeConnections();
-         return true;
-            }
-         else{
-//                    saveInfoInitialize(player);
-                                saveGame(player); 
-                                System.out.println("Thanks for Playing!");
-                                GameLogic.isRunning = false;
-                                 conn.close();
-         db.closeConnections();
-}
-         return false;
-        
-    }
 
 
 
-
-      private static synchronized void saveGame(Player pc) throws SQLException {
- 
+      protected static synchronized void saveGame(Player pc) throws SQLException {
+       
         db = new DBManager();
         conn = db.getConnection();
         PreparedStatement pstmt;
@@ -73,8 +74,6 @@ public class SaveGame {
             pstmt.setInt(3, pc.roomCount);
             pstmt.setInt(4, pc.xp);
             pstmt.setString(5, pc.name);
-
-
         }
         else{
              /*set indexes
@@ -91,14 +90,11 @@ public class SaveGame {
            pstmt.setInt(4, pc.roomCount);
            pstmt.setInt(5, pc.xp);
            pstmt.execute();
-
         }
         pstmt.close();
         conn.close();
         db.closeConnections();
-        g.saveText.setText("Game saved!");
-        g.yesBtnSave.setVisible(false);
-        g.noBtnSave.setVisible(false);
+       
 //        GameLogic.isRunning = false;
     }
       

@@ -32,9 +32,11 @@ public class Player extends Character{
     }
 
     static void win(Player pc, int xp) {
+        g = GameLogic.gameGui;
         pc.xp += xp;
         if(pc.xp >= 100){
-        g.textArea.setText("You levelled up! Your max hp increased by 10! Your hp was restored!");
+        String levelUp = "You levelled up! Your max hp increased by 10! Your hp was restored!";
+        g.textArea.setText(levelUp);
         pc.maxHP += 10;
         pc.hp = pc.maxHP;
         pc.xp %= 100;

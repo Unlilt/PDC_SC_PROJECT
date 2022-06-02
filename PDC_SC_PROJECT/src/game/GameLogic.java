@@ -80,30 +80,9 @@ public class GameLogic implements Runnable {
         }
         //If player is going in to final room
         if(player.roomCount > 5){
-            System.out.println("This is it.");
-            anyKeyToContinue();
-            System.out.println("The final battle");
-            anyKeyToContinue();
-            System.out.println("(1) Yes! Bring it on!");
-            System.out.println("(2)NO! TAKE ME HOME!");
-            int input = getInput("->", 2);
-            if(input == 2){
-                clearConsole();
-                System.out.println("Silly " + player.getName() + ", you're the hero.");
-                anyKeyToContinue();
-                clearConsole();
-                System.out.println("You don't get a choice!");
-                anyKeyToContinue();
-
-            }
-            clearConsole();
-            System.out.println(Map.getRoomDesc(player.roomCount));
-            anyKeyToContinue();
+            GUI.bossBattle();
             Battle.finalBattle(player);
-            System.out.println("Thank you for Playing!");
-                    isRunning = false;
-
-        }
+            }
     }
 
     @Override
