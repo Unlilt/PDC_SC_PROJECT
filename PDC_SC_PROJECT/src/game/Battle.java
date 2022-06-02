@@ -23,6 +23,10 @@ public class Battle {
         g.playerStats.setText(pcStats);
         g.enemyStats.setText(enemyStats);
         g.battleText.setText("A " + enemy.name + " blocks your path! What do you want to do?");
+        g.fightBtn.setVisible(true);
+        g.runBtn.setVisible(true);
+        g.battleEndedContinueBtn.setVisible(false);
+
         g.battleStart();
    
 //        

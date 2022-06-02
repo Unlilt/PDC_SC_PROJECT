@@ -60,10 +60,7 @@ public class Player extends Character{
             stmt.execute();
             stmt.close();
         }
-//        else{
-//            LoadGame.loadPrompt(name);
-//        }
-//        
+       
             
         conn.close();
         db.closeConnections();
@@ -84,6 +81,7 @@ public class Player extends Character{
         else{
         rest+=("Your hp is restored by " + healed + " points!");
         g.textArea.setText(rest);
+        
     }}
 
     private void createPlayerTable() throws SQLException {

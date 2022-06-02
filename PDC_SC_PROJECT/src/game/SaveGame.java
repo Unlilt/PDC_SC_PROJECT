@@ -5,7 +5,6 @@
  */
 package game;
 
-import static game.GameLogic.getInput;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,32 +18,30 @@ import java.util.Map;
  * Student ID: 20108594
  */
 public class SaveGame {
+    
+    public static GUI g;
     public static DBManager db;
     public static Connection conn;
+    
      static boolean  savePrompt(Player player) throws SQLException {
          db = new DBManager();
          conn = db.getConnection();
           String name = player.getName();
-          String fileName = name + ".txt";
-        File file = new File("./resources/" + fileName);
+      
          if((Player.ifPlayerExists(name))){
-                System.out.println("You have an existing save. Overwrite it?");
-                System.out.println("(1) Yes I'm sure!");
-                System.out.println("(2) No, exit without saving.");
-                //Input for testing
-//                int input = 1;
-                 int input = getInput("->", 2);
-                        if(input == 1)
-//                            saveInfoInitialize(player);
-                            saveGame(player);
-                        System.out.println("Thanks for Playing!");
-                         conn.close();
+                String overwrite = "You have an existing save. Overwrite it?";
+                g.saveText.setText(overwrite);
+                g.yesBtnSave.setVisible(true);
+                g.noBtnSave.setVisible(true);
+
+            
+         conn.close();
          db.closeConnections();
          return true;
             }
          else{
 //                    saveInfoInitialize(player);
-//                                saveGame(file); 
+                                saveGame(player); 
                                 System.out.println("Thanks for Playing!");
                                 GameLogic.isRunning = false;
                                  conn.close();
@@ -53,20 +50,8 @@ public class SaveGame {
          return false;
         
     }
-          protected static Map<String, String> playerInfo = new HashMap<>();
 
-      
-//         public static void saveInfoInitialize(Player player) {
-//
-//        playerInfo.put("NAME", player.getName()) ;
-//        playerInfo.put("MAXHP", String.valueOf(player.getMaxHP())) ;
-//        playerInfo.put("HP", String.valueOf(player.getHp())) ;
-//        playerInfo.put("XP", String.valueOf(player.getXp())) ;
-//        playerInfo.put("ROOMCOUNT", String.valueOf(player.roomCount)) ;
-//
-//
-//
-//    }
+
 
 
       private static synchronized void saveGame(Player pc) throws SQLException {
@@ -87,7 +72,7 @@ public class SaveGame {
             pstmt.setInt(2, pc.maxHP);
             pstmt.setInt(3, pc.roomCount);
             pstmt.setInt(4, pc.xp);
-            pstmt.setString(5, pc.name.toUpperCase());
+            pstmt.setString(5, pc.name);
 
 
         }
@@ -100,7 +85,7 @@ public class SaveGame {
             xp = 5
             */
             pstmt = conn.prepareStatement("INSERT INTO PLAYER VALUES (?, ?, ?, ?, ?)");
-           pstmt.setString(1, pc.name.toUpperCase());
+           pstmt.setString(1, pc.name);
            pstmt.setInt(2, pc.hp);
            pstmt.setInt(3, pc.maxHP);
            pstmt.setInt(4, pc.roomCount);
@@ -111,7 +96,10 @@ public class SaveGame {
         pstmt.close();
         conn.close();
         db.closeConnections();
-        GameLogic.isRunning = false;
+        g.saveText.setText("Game saved!");
+        g.yesBtnSave.setVisible(false);
+        g.noBtnSave.setVisible(false);
+//        GameLogic.isRunning = false;
     }
       
 }
