@@ -28,38 +28,7 @@ public class Battle {
         g.battleEndedContinueBtn.setVisible(false);
 
         g.battleStart();
-   
-//        
-//           switch(input){
-//               case 1:
-//                  
-//                   //attempt to escape
-//               case 2:
-//                    GameLogic.clearConsole();
-//                   int escapeChance = rand.nextInt(100);
-//                   //success
-//                   if(escapeChance > 50){
-//                       System.out.println("You successfully escaped!");
-//                       battle = false;
-//                   }
-//                   //fail
-//                   else{
-//                       System.out.println("You cannot escape!");
-//                       dmgTaken = attack();
-//                        System.out.println("The enemy dealt " + dmgTaken + " damage to you!");
-//                        player.hp -= dmgTaken;
-//                        GameLogic.anyKeyToContinue();
-//                        if(player.getHp() <= 0){
-//                       Player.death(enemy.getName());
-//                       battle = false;
-//                   }
-//                   }
-//                   break;
-//               default:
-//                   break;
-//               
-//           }
-       
+          
     }
     
      public static void fight(){
@@ -95,6 +64,28 @@ public class Battle {
               
 
      }
+     
+     public static void escape(){
+           case 2:
+//                    GameLogic.clearConsole();
+//                   int escapeChance = rand.nextInt(100);
+//                   //success
+//                   if(escapeChance > 50){
+//                       System.out.println("You successfully escaped!");
+//                       battle = false;
+//                   }
+//                   //fail
+//                   else{
+//                       System.out.println("You cannot escape!");
+//                       dmgTaken = attack();
+//                        System.out.println("The enemy dealt " + dmgTaken + " damage to you!");
+//                        player.hp -= dmgTaken;
+//                        GameLogic.anyKeyToContinue();
+//                        if(player.getHp() <= 0){
+//                       Player.death(enemy.getName());
+//                       battle = false;
+//                   }
+     }
     public static int attack() {
         int dmg = new Random().nextInt(15) + 1;
         return dmg;
@@ -123,7 +114,6 @@ public class Battle {
                    int dmgTaken = bossAttack();
                     System.out.println("The enemy dealt " + dmgTaken + " damage to you!");
                    player.hp -= dmgTaken;
-                   GameLogic.anyKeyToContinue();
 
                    //if player beats emperor
                    if(Gnosis.hp <= 0)
