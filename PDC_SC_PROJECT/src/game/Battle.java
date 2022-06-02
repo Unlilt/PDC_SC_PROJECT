@@ -10,77 +10,87 @@ import java.util.Random;
 public class Battle {
     
     public static Random rand = new Random();
-
+    public static Enemy opp;
+    public static Player pc;
+    public static GUI g;
     
     public static void startBattle(Player player, Enemy enemy){
+        pc = player;
+        opp = enemy;
+        g = GameLogic.gameGui;
+        String enemyStats = opp.name + " HP: " + opp.getHp();
+        String pcStats =  player.name + " HP: " + player.getHp();
+        g.playerStats.setText(pcStats);
+        g.enemyStats.setText(enemyStats);
+        g.battleText.setText("A " + enemy.name + " blocks your path! What do you want to do?");
+        g.battleStart();
+   
+//        
+//           switch(input){
+//               case 1:
+//                  
+//                   //attempt to escape
+//               case 2:
+//                    GameLogic.clearConsole();
+//                   int escapeChance = rand.nextInt(100);
+//                   //success
+//                   if(escapeChance > 50){
+//                       System.out.println("You successfully escaped!");
+//                       battle = false;
+//                   }
+//                   //fail
+//                   else{
+//                       System.out.println("You cannot escape!");
+//                       dmgTaken = attack();
+//                        System.out.println("The enemy dealt " + dmgTaken + " damage to you!");
+//                        player.hp -= dmgTaken;
+//                        GameLogic.anyKeyToContinue();
+//                        if(player.getHp() <= 0){
+//                       Player.death(enemy.getName());
+//                       battle = false;
+//                   }
+//                   }
+//                   break;
+//               default:
+//                   break;
+//               
+//           }
+       
+    }
     
-        boolean battle = true;
-       while(battle){
-           GameLogic.clearConsole();
-           GameLogic.printHeading(enemy.name + " HP: " + enemy.getHp());
-           GameLogic.printHeading(player.name + " HP: " + player.getHp());
-           System.out.println("Choose an Action");
-           GameLogic.printPartition(30);
-           System.out.println("(1) Fight");
-           System.out.println("(2) Run");
-           int input = GameLogic.getInput("->", 2);
-           switch(input){
-               case 1:
-                    GameLogic.clearConsole();
+     public static void fight(){
                    int dmgDealt = attack();
-                   System.out.println("You dealt " + dmgDealt + " damage to the enemy!");
-                   enemy.hp -= dmgDealt;
+                   String dmg = "You dealt " + dmgDealt + " damage to the enemy!\n";
+                   opp.hp -= dmgDealt;
                    int dmgTaken = attack();
-                    System.out.println("The enemy dealt " + dmgTaken + " damage to you!");
-                   player.hp -= dmgTaken;
-                   GameLogic.anyKeyToContinue();
+                    dmg += "The enemy dealt " + dmgTaken + " damage to you!";
+                   pc.hp -= dmgTaken;
+                   g.battleText.setText(dmg);
+                   g.playerStats.setText(pc.name + " HP: "+pc.hp);
+                   if(opp.hp <= 0)
+                        g.enemyStats.setText(opp.name + " HP: 0");
+
+                    g.enemyStats.setText(opp.name + " HP: "+opp.hp);
+
 
                    //if player wins
-                   if(enemy.hp <= 0)
+                   if(opp.hp <= 0)
                    {
-                       System.out.println("You have defeated the " + enemy.getName() +"! You gained " + enemy.getXp() + "xp points!");
-                       player.win(player, enemy.getXp());
-                       GameLogic.anyKeyToContinue();
-                       battle = false;
+                       String win = "You have defeated the " + opp.getName() +"! You gained " + opp.getXp() + "xp points!";
+                       g.battleText.setText(win);
+                       pc.win(pc, opp.getXp());
+                       g.fightBtn.setVisible(false);
+                       g.runBtn.setVisible(false);
+                       g.battleEndedContinueBtn.setVisible(true);
                    }
 
                    //if plaver loses
-                   else if(player.getHp() <= 0){
-                       Player.death(enemy.getName());
-                       battle = false;
+                   else if(pc.getHp() <= 0){
+                       Player.death(opp.getName());
                    }
-                   break;
+              
 
-                   //attempt to escape
-               case 2:
-                    GameLogic.clearConsole();
-                   int escapeChance = rand.nextInt(100);
-                   //success
-                   if(escapeChance > 50){
-                       System.out.println("You successfully escaped!");
-                       battle = false;
-                   }
-                   //fail
-                   else{
-                       System.out.println("You cannot escape!");
-                       dmgTaken = attack();
-                        System.out.println("The enemy dealt " + dmgTaken + " damage to you!");
-                        player.hp -= dmgTaken;
-                        GameLogic.anyKeyToContinue();
-                        if(player.getHp() <= 0){
-                       Player.death(enemy.getName());
-                       battle = false;
-                   }
-                   }
-                   break;
-               default:
-                   break;
-               
-           }
-       }
-    }
-    
-     
+     }
     public static int attack() {
         int dmg = new Random().nextInt(15) + 1;
         return dmg;
@@ -97,17 +107,12 @@ public class Battle {
         Enemy Gnosis = new Enemy("Evil Emperor Gnosis", 85, 97);
         boolean battle = true;
         while(battle){
-         GameLogic.clearConsole();
-           GameLogic.printHeading(Gnosis.name + " HP: " + Gnosis.getHp());
-           GameLogic.printHeading(player.name + " HP: " + player.getHp());
-           System.out.println("Choose an Action");
-           GameLogic.printPartition(30);
-           System.out.println("(1) Fight");
-           System.out.println("(2) Run");
+           g.enemyStats.setText(Gnosis.name + " HP: " + Gnosis.getHp());
+           g.playerStats.setText(player.name + " HP: " + pc.getHp());
+         
            int input = GameLogic.getInput("->", 2);
            switch(input){
                case 1:
-                    GameLogic.clearConsole();
                    int dmgDealt = attack();
                    System.out.println("You dealt " + dmgDealt + " damage to the enemy!");
                    Gnosis.hp -= dmgDealt;
@@ -133,7 +138,6 @@ public class Battle {
                    }
                    break;
                case 2:
-                    GameLogic.clearConsole();
                        System.out.println("THERE IS NO ESCAPE!");
                        dmgTaken = attack();
                         System.out.println("The Emperor dealt " + dmgTaken + " damage to you!");

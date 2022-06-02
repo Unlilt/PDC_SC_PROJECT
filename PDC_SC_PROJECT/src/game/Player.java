@@ -20,12 +20,13 @@ import java.util.Random;
 public class Player extends Character{
     public static Connection conn;
     public static DBManager db;
+    public static GUI g;
     
     static void death(String killer) {
-        GameLogic.clearConsole();
-        System.out.println("You were killed by the " + killer + "! Evil Emperor Gnosis remains!");
-        System.out.println("If you were to return to the past, would you succeed?");
-        System.out.println("Thank you for playing!");
+        String death = "";
+        death+="You were killed by the " + killer + "! Evil Emperor Gnosis remains!";
+        death+="If you were to return to the past, would you succeed?";
+        death+="Thank you for playing!";
         isRunning = false;
 
     }
@@ -33,7 +34,7 @@ public class Player extends Character{
     static void win(Player pc, int xp) {
         pc.xp += xp;
         if(pc.xp >= 100){
-        System.out.println("You levelled up! Your max hp increased by 10! Your hp was restored!");
+        g.textArea.setText("You levelled up! Your max hp increased by 10! Your hp was restored!");
         pc.maxHP += 10;
         pc.hp = pc.maxHP;
         pc.xp %= 100;
@@ -59,7 +60,10 @@ public class Player extends Character{
             stmt.execute();
             stmt.close();
         }
-        
+//        else{
+//            LoadGame.loadPrompt(name);
+//        }
+//        
             
         conn.close();
         db.closeConnections();
@@ -68,19 +72,18 @@ public class Player extends Character{
    
     
     public void rest(){
-        GameLogic.clearConsole();
-        System.out.println("You find a moment to compose yourself! \nThe determination running through you keeps you going.");
+        String rest = "You find a moment to compose yourself! \nThe determination running through you keeps you going.";
+        
         int healed = rand.nextInt(this.maxHP/2);
         this.hp += healed;
         if(this.hp > this.maxHP){
-            System.out.println("Your hp is restored to max!");
+            rest+="Your hp is restored to max!";
             this.hp = this.getMaxHP();
-            GameLogic.anyKeyToContinue();
 
         }
         else{
-        System.out.println("Your hp is restored by " + healed + " points!");
-        GameLogic.anyKeyToContinue();
+        rest+=("Your hp is restored by " + healed + " points!");
+        g.textArea.setText(rest);
     }}
 
     private void createPlayerTable() throws SQLException {
@@ -97,7 +100,7 @@ public class Player extends Character{
     public static boolean ifPlayerExists(String name) throws SQLException{
         db = new DBManager();
         conn = db.getConnection();
-     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM PLAYER WHERE NAME = ?");
+     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM PLAYER WHERE NAME = ? ");
      stmt.setString(1, name);
      ResultSet rs = stmt.executeQuery();
      

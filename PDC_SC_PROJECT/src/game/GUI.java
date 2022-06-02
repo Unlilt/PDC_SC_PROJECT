@@ -28,8 +28,8 @@ public class GUI extends javax.swing.JFrame {
         newGame.setVisible(false);
         loopPanel.setVisible(false);
         loadGame.setVisible(false);
-        verifyLoad.setVisible(false);
-        verifyNew.setVisible(false);
+//        verifyLoad.setVisible(false);
+        battle.setVisible(false);
 
         
     }
@@ -58,6 +58,13 @@ public class GUI extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
         yesBtnNew = new javax.swing.JButton();
         noBtnNew = new javax.swing.JButton();
+        battle = new javax.swing.JPanel();
+        battleText = new java.awt.TextField();
+        playerStats = new java.awt.Label();
+        enemyStats = new java.awt.Label();
+        fightBtn = new javax.swing.JButton();
+        runBtn = new javax.swing.JButton();
+        battleEndedContinueBtn = new javax.swing.JButton();
         loopPanel = new javax.swing.JPanel();
         continueBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
@@ -75,12 +82,6 @@ public class GUI extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         yesBtnLoad = new javax.swing.JButton();
         noBtnLoad = new javax.swing.JButton();
-        battle = new javax.swing.JPanel();
-        battleText = new java.awt.TextField();
-        PlayerStats = new java.awt.Label();
-        EnemyStats = new java.awt.Label();
-        fightBtn = new javax.swing.JButton();
-        runBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 500, 500));
@@ -291,6 +292,78 @@ public class GUI extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
+        battle.setMinimumSize(new java.awt.Dimension(500, 500));
+
+        battleText.setText("textField1");
+
+        playerStats.setText("label1");
+
+        enemyStats.setText("label1");
+
+        fightBtn.setText("Fight");
+        fightBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fightBtnActionPerformed(evt);
+            }
+        });
+
+        runBtn.setText("Run");
+
+        battleEndedContinueBtn.setLabel("Continue");
+        battleEndedContinueBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                battleEndedContinueBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout battleLayout = new javax.swing.GroupLayout(battle);
+        battle.setLayout(battleLayout);
+        battleLayout.setHorizontalGroup(
+            battleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(battleLayout.createSequentialGroup()
+                .addGroup(battleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(battleLayout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addGroup(battleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(playerStats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(battleText, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+                            .addGroup(battleLayout.createSequentialGroup()
+                                .addComponent(enemyStats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(104, 104, 104))))
+                    .addGroup(battleLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(fightBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                        .addGap(106, 106, 106)
+                        .addComponent(runBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(89, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, battleLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(battleEndedContinueBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(240, 240, 240))
+        );
+
+        battleLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {fightBtn, runBtn});
+
+        battleLayout.setVerticalGroup(
+            battleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(battleLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(playerStats, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(battleText, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(enemyStats, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(battleEndedContinueBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(battleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(runBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fightBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68))
+        );
+
+        battleLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {fightBtn, runBtn});
+
         loopPanel.setMinimumSize(new java.awt.Dimension(500, 500));
 
         continueBtn.setText("Continue");
@@ -485,58 +558,6 @@ public class GUI extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        battle.setMinimumSize(new java.awt.Dimension(500, 500));
-
-        battleText.setText("textField1");
-
-        PlayerStats.setText("label1");
-
-        EnemyStats.setText("label1");
-
-        fightBtn.setText("Fight");
-
-        runBtn.setText("Run");
-
-        javax.swing.GroupLayout battleLayout = new javax.swing.GroupLayout(battle);
-        battle.setLayout(battleLayout);
-        battleLayout.setHorizontalGroup(
-            battleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(battleLayout.createSequentialGroup()
-                .addGroup(battleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(battleLayout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addGroup(battleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(PlayerStats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(battleText, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
-                            .addComponent(EnemyStats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(battleLayout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(fightBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(runBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(90, Short.MAX_VALUE))
-        );
-
-        battleLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {fightBtn, runBtn});
-
-        battleLayout.setVerticalGroup(
-            battleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(battleLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(PlayerStats, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(battleText, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EnemyStats, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(battleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(runBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fightBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(68, Short.MAX_VALUE))
-        );
-
-        battleLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {fightBtn, runBtn});
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -715,6 +736,7 @@ public class GUI extends javax.swing.JFrame {
             }//GEN-LAST:event_yesBtnNewActionPerformed
 
     private void continueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueBtnActionPerformed
+       setLoopPanel();
         GameLogic.continueAdventure();
         
     }//GEN-LAST:event_continueBtnActionPerformed
@@ -724,6 +746,16 @@ public class GUI extends javax.swing.JFrame {
         verifyNew.setVisible(false);
         charaInputNew.setVisible(true);
     }//GEN-LAST:event_noBtnNewActionPerformed
+
+    private void fightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fightBtnActionPerformed
+        Battle.fight();
+    }//GEN-LAST:event_fightBtnActionPerformed
+
+    private void battleEndedContinueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_battleEndedContinueBtnActionPerformed
+        battle.setVisible(false);
+        setLoopPanel();
+        loopPanel.setVisible(true);
+    }//GEN-LAST:event_battleEndedContinueBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -764,11 +796,10 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Label EnemyStats;
-    private java.awt.Label PlayerStats;
     private javax.swing.JPanel TitlePanel;
     private javax.swing.JPanel battle;
-    private java.awt.TextField battleText;
+    protected javax.swing.JButton battleEndedContinueBtn;
+    protected java.awt.TextField battleText;
     private javax.swing.JPanel charaInput;
     private javax.swing.JPanel charaInputNew;
     private javax.swing.JTextField charaNameInput;
@@ -777,9 +808,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton contBtn1;
     private javax.swing.JButton contBtnNew;
     private javax.swing.JButton continueBtn;
+    protected java.awt.Label enemyStats;
     private javax.swing.JLabel enterCharacterName;
     private javax.swing.JLabel enterCharacterName1;
-    private javax.swing.JButton fightBtn;
+    protected javax.swing.JButton fightBtn;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPaneLoad;
     private javax.swing.JScrollPane jScrollPaneNew;
@@ -792,8 +824,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton newGameBtn;
     private javax.swing.JButton noBtnLoad;
     private javax.swing.JButton noBtnNew;
+    protected java.awt.Label playerStats;
     private javax.swing.JButton restartBtn;
-    private javax.swing.JButton runBtn;
+    protected javax.swing.JButton runBtn;
     private javax.swing.JButton saveBtn;
     protected javax.swing.JTextArea textArea;
     private java.awt.Label titleLabel;
@@ -809,15 +842,15 @@ public class GUI extends javax.swing.JFrame {
         verifyLoad.setVisible(true);
     }
     
-//    public void updatePc(){
-//        pc.hp = GameLogic.player.hp;
-//        pc.maxHP = GameLogic.player.maxHP;
-//        pc.roomCount = GameLogic.player.roomCount;
-//        pc.xp = GameLogic.player.xp;
-//    }
+    public void updatePc(){
+        pc.hp = GameLogic.player.hp;
+        pc.maxHP = GameLogic.player.maxHP;
+        pc.roomCount = GameLogic.player.roomCount;
+        pc.xp = GameLogic.player.xp;
+    }
 
     private void setLoopPanel() {
-//        updatePc();
+        updatePc();
         int roomNo = GameLogic.player.roomCount;
         String t;
         if(roomNo == 0){
@@ -828,7 +861,7 @@ public class GUI extends javax.swing.JFrame {
             "This is your chance!\n" +
             "Onward brave hero!";
         }else{
-        t = Map.getRoomDesc(pc.roomCount);
+        t = Map.getRoomDesc(roomNo);
         }
         textArea.setText(t);
         String l = "Name: " + GameLogic.player.name + "     HP: " + GameLogic.player.hp +"      XP: " + GameLogic.player.xp;
@@ -837,7 +870,8 @@ public class GUI extends javax.swing.JFrame {
     
     public void battleStart() {
         loopPanel.setVisible(false);
-        
+        battle.setVisible(true);
+        battleEndedContinueBtn.setVisible(false);
     }
 
 }
