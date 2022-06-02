@@ -954,6 +954,8 @@ public class GUI extends javax.swing.JFrame {
         //get name from text area          
         name = charaNameInput.getText();
         try {
+            Player player = new Player(name);
+
             if(Player.ifPlayerExists(name))
             {
                 newGame.setVisible(false);
@@ -1102,6 +1104,7 @@ public class GUI extends javax.swing.JFrame {
         }
          yesBtnSave.setVisible(false);
         noBtnSave.setVisible(false);
+        contBtnSave.setVisible(true);
     }//GEN-LAST:event_yesBtnSaveActionPerformed
 
     private void contBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contBtnSaveActionPerformed

@@ -5,7 +5,6 @@
  */
 package game;
 
-import static game.GameLogic.isRunning;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,11 +22,12 @@ public class Player extends Character{
     public static GUI g;
     
     static void death(String killer) {
+        g = GameLogic.gameGui;
         String death = "";
         death+="You were killed by the " + killer + "! Evil Emperor Gnosis remains!";
         death+="If you were to return to the past, would you succeed?";
         death+="Thank you for playing!";
-        isRunning = false;
+        g.battleText.setText(death);
 
     }
 
@@ -51,7 +51,8 @@ public class Player extends Character{
        this.roomCount = 0;
         db = new DBManager();
         conn = db.getConnection();
-       
+        
+        
         if(!db.ifTableExists("PLAYER")){
             createPlayerTable();
         }
@@ -71,7 +72,7 @@ public class Player extends Character{
    
     
     public void rest(){
-        g = GameLogic.gameGui;
+          g = GameLogic.gameGui;
 
         String rest = "You find a moment to compose yourself! \nThe determination running through you keeps you going.";
         

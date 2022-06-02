@@ -44,5 +44,6 @@ public class LoadGame {
             pstmt.close();
             conn.close();
             db.closeConnections();
+            GameLogic.player = pc;
             return pc;
     }}
