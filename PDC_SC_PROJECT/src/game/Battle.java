@@ -66,7 +66,6 @@ public class Battle {
      }
      
      public static void escape(){
-           case 2:
 //                    GameLogic.clearConsole();
 //                   int escapeChance = rand.nextInt(100);
 //                   //success
@@ -105,14 +104,12 @@ public class Battle {
            g.enemyStats.setText(Gnosis.name + " HP: " + Gnosis.getHp());
            g.playerStats.setText(player.name + " HP: " + pc.getHp());
          
-           int input = GameLogic.getInput("->", 2);
-           switch(input){
-               case 1:
+         
                    int dmgDealt = attack();
-                   System.out.println("You dealt " + dmgDealt + " damage to the enemy!");
+                   g.bossBattleText.setText("You dealt " + dmgDealt + " damage to the enemy!");
                    Gnosis.hp -= dmgDealt;
                    int dmgTaken = bossAttack();
-                    System.out.println("The enemy dealt " + dmgTaken + " damage to you!");
+                   g.bossBattleText.setText("The enemy dealt " + dmgTaken + " damage to you!");
                    player.hp -= dmgTaken;
 
                    //if player beats emperor
@@ -120,52 +117,21 @@ public class Battle {
                    {
                        System.out.println("You have defeated the " + Gnosis.getName() +"! You gained " + Gnosis.getXp() + "xp points!");
                        //Play final boss winning story
-                       finale();
-//                       player.win(player, Gnosis.getXp());
-                       GameLogic.anyKeyToContinue();
-                       battle = false;
+                       g.finale();
+                       player.win(player, Gnosis.getXp());
                    }
                    //if player loses
                    else if(player.getHp() <= 0){
                        Player.death(Gnosis.getName());
                        battle = false;
                    }
-                   break;
-               case 2:
-                       System.out.println("THERE IS NO ESCAPE!");
-                       dmgTaken = attack();
-                        System.out.println("The Emperor dealt " + dmgTaken + " damage to you!");
-                        player.hp -= dmgTaken;
-                        GameLogic.anyKeyToContinue();
-                        if(player.getHp() <= 0){
-                       Player.death(Gnosis.getName());
-                       battle = false;
-                        }
-                   break;
-               default:
-                   break;
+            
                
            }
        }
         
     }
 
-    //print final story lines
-    private static void finale() {
-        GameLogic.clearConsole();
-        System.out.println("The Evil Emperor falls to his knees, defeated. You stand above him, sword raised.");
-        GameLogic.anyKeyToContinue();
-        GameLogic.clearConsole();        
-        System.out.println("As you swing down, the moon shines off your blade, blinding you momentairily. \nThe Evil Emperor raises his hand and you are sent flying back.");
-        GameLogic.anyKeyToContinue();        
-        GameLogic.clearConsole();        
-        System.out.println("He stands and laughs. The robes wrap around him and when you blink again, he is gone.");
-        GameLogic.anyKeyToContinue();
-        GameLogic.clearConsole();     
-        System.out.println("Congratualtions, you beat the emperor!");
-        System.out.println("The kingdom is safe once more...but for how long?");
-        
-        
-    }
 
-}
+
+

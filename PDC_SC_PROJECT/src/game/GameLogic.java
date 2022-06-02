@@ -80,7 +80,7 @@ public class GameLogic implements Runnable {
         }
         //If player is going in to final room
         if(player.roomCount > 5){
-            GUI.bossBattle();
+            gameGui.bossBattle();
             Battle.finalBattle(player);
             }
     }

@@ -71,6 +71,8 @@ public class Player extends Character{
    
     
     public void rest(){
+        g = GameLogic.gameGui;
+
         String rest = "You find a moment to compose yourself! \nThe determination running through you keeps you going.";
         
         int healed = rand.nextInt(this.maxHP/2);

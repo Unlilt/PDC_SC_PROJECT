@@ -5,8 +5,6 @@
  */
 package game;
 
-import static game.SaveGame.g;
-import java.awt.TextArea;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,8 +34,8 @@ public class GUI extends javax.swing.JFrame {
         battle.setVisible(false);
         saveGame.setVisible(false);
         restartPanel.setVisible(false);
-
-
+        bossBattlePanel.setVisible(false);
+        finalPanel.setVisible(false);
         
     }
 
@@ -99,6 +97,17 @@ public class GUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         yesBtnSaveRestart = new javax.swing.JButton();
         noBtnRestartSave = new javax.swing.JButton();
+        bossBattlePanel = new javax.swing.JPanel();
+        playerStats1 = new java.awt.Label();
+        bossFightBtn = new javax.swing.JButton();
+        bossRunBtn = new javax.swing.JButton();
+        battleEndedContinueBtn1 = new javax.swing.JButton();
+        bossBattleText = new java.awt.TextField();
+        finalPanel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        exitBtn = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        finalRestartBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 500, 500));
@@ -694,6 +703,134 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(154, Short.MAX_VALUE))
         );
 
+        playerStats1.setText("label1");
+
+        bossFightBtn.setText("Fight");
+        bossFightBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bossFightBtnActionPerformed(evt);
+            }
+        });
+
+        bossRunBtn.setText("Run");
+        bossRunBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bossRunBtnActionPerformed(evt);
+            }
+        });
+
+        battleEndedContinueBtn1.setLabel("Continue");
+        battleEndedContinueBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                battleEndedContinueBtn1ActionPerformed(evt);
+            }
+        });
+
+        bossBattleText.setText("textField1");
+
+        javax.swing.GroupLayout bossBattlePanelLayout = new javax.swing.GroupLayout(bossBattlePanel);
+        bossBattlePanel.setLayout(bossBattlePanelLayout);
+        bossBattlePanelLayout.setHorizontalGroup(
+            bossBattlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bossBattlePanelLayout.createSequentialGroup()
+                .addGroup(bossBattlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bossBattlePanelLayout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(playerStats1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bossBattlePanelLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(bossFightBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(106, 106, 106)
+                        .addComponent(bossRunBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(89, Short.MAX_VALUE))
+            .addGroup(bossBattlePanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(bossBattleText, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bossBattlePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(battleEndedContinueBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(255, 255, 255))
+        );
+        bossBattlePanelLayout.setVerticalGroup(
+            bossBattlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bossBattlePanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(playerStats1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bossBattleText, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(battleEndedContinueBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(bossBattlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bossRunBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bossFightBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68))
+        );
+
+        bossBattlePanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {bossFightBtn, bossRunBtn});
+
+        finalPanel.setMinimumSize(new java.awt.Dimension(500, 500));
+        finalPanel.setPreferredSize(new java.awt.Dimension(500, 500));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Thanks for playing!");
+
+        exitBtn.setText("Exit");
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Created by Jade Thompson-Tavai");
+
+        finalRestartBtn.setText("Restart");
+        finalRestartBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finalRestartBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout finalPanelLayout = new javax.swing.GroupLayout(finalPanel);
+        finalPanel.setLayout(finalPanelLayout);
+        finalPanelLayout.setHorizontalGroup(
+            finalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finalPanelLayout.createSequentialGroup()
+                .addGroup(finalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(finalPanelLayout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(finalPanelLayout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addComponent(jLabel3))
+                    .addGroup(finalPanelLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84)
+                        .addComponent(finalRestartBtn)))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        finalPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {exitBtn, finalRestartBtn});
+
+        finalPanelLayout.setVerticalGroup(
+            finalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(finalPanelLayout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addGroup(finalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finalRestartBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(39, 39, 39))
+        );
+
+        finalPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {exitBtn, finalRestartBtn});
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -734,6 +871,16 @@ public class GUI extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(restartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(bossBattlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(finalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -772,6 +919,16 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(restartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(bossBattlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(finalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -973,6 +1130,33 @@ public class GUI extends javax.swing.JFrame {
         titlePanel.setVisible(true);
     }//GEN-LAST:event_noBtnRestartSaveActionPerformed
 
+    private void bossFightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bossFightBtnActionPerformed
+        // TODO add your handling code here:
+                Battle.finalBattle(GameLogic.player);
+
+    }//GEN-LAST:event_bossFightBtnActionPerformed
+
+    private void battleEndedContinueBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_battleEndedContinueBtn1ActionPerformed
+        bossBattlePanel.setVisible(false);
+        finalPanel.setVisible(true);
+    }//GEN-LAST:event_battleEndedContinueBtn1ActionPerformed
+
+    private void bossRunBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bossRunBtnActionPerformed
+         
+                String taunt = "Silly " + GameLogic.player.name + ", you're the hero.\nYou don't get a choice!";
+                bossRunBtn.setVisible(false);
+    }//GEN-LAST:event_bossRunBtnActionPerformed
+
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
+        System.exit(1);
+    }//GEN-LAST:event_exitBtnActionPerformed
+
+    private void finalRestartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalRestartBtnActionPerformed
+        // TODO add your handling code here:
+        finalPanel.setVisible(false);
+        titlePanel.setVisible(true);
+    }//GEN-LAST:event_finalRestartBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1015,7 +1199,12 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel TitlePanel;
     private javax.swing.JPanel battle;
     protected javax.swing.JButton battleEndedContinueBtn;
+    protected javax.swing.JButton battleEndedContinueBtn1;
     protected java.awt.TextField battleText;
+    private javax.swing.JPanel bossBattlePanel;
+    protected java.awt.TextField bossBattleText;
+    protected javax.swing.JButton bossFightBtn;
+    protected javax.swing.JButton bossRunBtn;
     private javax.swing.JPanel charaInput;
     private javax.swing.JPanel charaInputNew;
     private javax.swing.JTextField charaNameInput;
@@ -1028,8 +1217,13 @@ public class GUI extends javax.swing.JFrame {
     protected java.awt.Label enemyStats;
     private javax.swing.JLabel enterCharacterName;
     private javax.swing.JLabel enterCharacterName1;
+    private javax.swing.JButton exitBtn;
     protected javax.swing.JButton fightBtn;
+    private javax.swing.JPanel finalPanel;
+    private javax.swing.JButton finalRestartBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPaneLoad;
     private javax.swing.JScrollPane jScrollPaneNew;
@@ -1045,6 +1239,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton noBtnRestartSave;
     protected javax.swing.JButton noBtnSave;
     protected java.awt.Label playerStats;
+    protected java.awt.Label playerStats1;
     private javax.swing.JButton restartBtn;
     private javax.swing.JPanel restartPanel;
     protected javax.swing.JButton runBtn;
@@ -1097,30 +1292,27 @@ public class GUI extends javax.swing.JFrame {
         battleEndedContinueBtn.setVisible(false);
     }
     
-    static void bossBattle() {
+    public void bossBattle() {
+        
         String bossIntro = "This is it.\n";
-       
-            System.out.println("The final battle");
-            anyKeyToContinue();
-            System.out.println("(1) Yes! Bring it on!");
-            System.out.println("(2)NO! TAKE ME HOME!");
-            int input = getInput("->", 2);
-            if(input == 2){
-                clearConsole();
-                System.out.println("Silly " + player.getName() + ", you're the hero.");
-                anyKeyToContinue();
-                clearConsole();
-                System.out.println("You don't get a choice!");
-                anyKeyToContinue();
+       bossIntro+="The final battle\n";
+       bossBattleText.setText(bossIntro);
+        loopPanel.setVisible(false);
+        battleEndedContinueBtn1.setVisible(false);
+        bossBattlePanel.setVisible(true);
 
-            }
-            clearConsole();
-            System.out.println(Map.getRoomDesc(player.roomCount));
-            anyKeyToContinue();
-            Battle.finalBattle(player);
-            System.out.println("Thank you for Playing!");
-                    isRunning = false;
 
+    }
+
+        //print final story lines
+    public  void finale() {
+        String finale = "The Evil Emperor falls to his knees, defeated. You stand above him, sword raised.\n"+
+        "As you swing down, the moon shines off your blade, blinding you momentairily. \nThe Evil Emperor raises his hand and you are sent flying back."+
+       "He stands and laughs. The robes wrap around him and when you blink again, he is gone.\n"+
+        "Congratualtions, you beat the emperor!\n"+
+        "The kingdom is safe once more...but for how long?";
+        battleEndedContinueBtn1.setVisible(true);
+        
     }
 
    
