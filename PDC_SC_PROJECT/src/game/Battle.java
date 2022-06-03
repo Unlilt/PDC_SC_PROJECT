@@ -99,16 +99,17 @@ public class Battle {
 
     public static void finalBattle(Player player) {
         Enemy Gnosis = new Enemy("Evil Emperor Gnosis", 85, 97);
-//           g.enemyStats.setText(Gnosis.name + " HP: " + Gnosis.getHp());
-           g.playerStats.setText(GameLogic.player.name + " HP: " + GameLogic.player.getHp());
+        boolean battle = true;
+        while(battle){
+           g.enemyStats.setText(Gnosis.name + " HP: " + Gnosis.getHp());
+           g.playerStats.setText(player.name + " HP: " + pc.getHp());
          
          
                    int dmgDealt = attack();
-                   String dmg ="You dealt " + dmgDealt + " damage to the enemy!";
+                   g.bossBattleText.setText("You dealt " + dmgDealt + " damage to the enemy!");
                    Gnosis.hp -= dmgDealt;
                    int dmgTaken = bossAttack();
-                   dmg += "The enemy dealt " + dmgTaken + " damage to you!";
-                   g.bossBattleText.setText(dmg);
+                   g.bossBattleText.setText("The enemy dealt " + dmgTaken + " damage to you!");
                    player.hp -= dmgTaken;
 
                    //if player beats emperor
@@ -122,13 +123,14 @@ public class Battle {
                    //if player loses
                    else if(player.getHp() <= 0){
                        Player.death(Gnosis.getName());
+                       battle = false;
                    }
             
                
            }
        }
         
-    
+    }
 
 
 
