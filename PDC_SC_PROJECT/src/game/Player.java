@@ -20,6 +20,8 @@ public class Player extends Character{
     public static Connection conn;
     public static DBManager db;
     public static GUI g;
+    public static int roomCount = 0;
+    Random rand = new Random();
     
     static void death(String killer) {
         g = GameLogic.gameGui;
@@ -42,17 +44,15 @@ public class Player extends Character{
         pc.xp %= 100;
         }
     }
-    public int roomCount = 0;
-    Random rand = new Random();
+ 
 
     
     public Player(String name) throws SQLException {
        super(name, 100, 0, "Player");
-       this.roomCount = 0;
+       roomCount = 0;
         db = new DBManager();
         
-        
-        
+             
         if(!db.ifTableExists("PLAYER")){
             createPlayerTable();
         }
@@ -101,7 +101,7 @@ public class Player extends Character{
         db = new DBManager();
         conn = db.getConnection();
      PreparedStatement stmt = conn.prepareStatement("SELECT * FROM PLAYER WHERE NAME = ? ");
-     stmt.setString(1, name);
+     stmt.setString(1, name.toUpperCase());
      ResultSet rs = stmt.executeQuery();
      
         return rs.next();

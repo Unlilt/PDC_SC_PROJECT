@@ -962,7 +962,7 @@ public class GUI extends javax.swing.JFrame {
                 verifyLoad.setVisible(true);
             } else 
             {
-                GameLogic.setPlayer(name);
+               GameLogic.player = pc;
                 newGame.setVisible(false);
                 setLoopPanel();           
                 loopPanel.setVisible(true);
@@ -989,7 +989,7 @@ public class GUI extends javax.swing.JFrame {
 
             if(!Player.ifPlayerExists(name)){
                 
-                GameLogic.setPlayer(name);
+                GameLogic.player = pc;
                 pc = GameLogic.player;
                     
             }
@@ -1036,26 +1036,20 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_yesBtnLoadActionPerformed
 
     private void yesBtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesBtnNewActionPerformed
-        try {
-            String name = charaNameInput.getText();
-            GameLogic.setPlayer(name);
-            
-            //start with intro
-            String text = "You are a brave hero who has been captured by the evil emperor Gnosis! \n" +
-                    "Thrown into the dungeon of his castle to rot, you plot an escape.\n" +
-                    "One day, a large explosion rock the castle, rubble falling into your chamber. \n" +
-                    "The force has knocked loose the cage door from the stone!\n" +
-                    "This is your chance!\n" +
-                    "Onward brave hero!";
-            String charaInfo = "Name:        " + GameLogic.player.name +"    HP:      " + GameLogic.player.hp + "     XP:         " + GameLogic.player.xp;
-            textArea.setText(text);
-            textArea.setEditable(false);
-            loopPanel.setVisible(true);
-            
-            characterInfo.setText(charaInfo);
-        } catch (SQLException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String name = charaNameInput.getText();
+        GameLogic.player = pc;
+        //start with intro
+        String text = "You are a brave hero who has been captured by the evil emperor Gnosis! \n" +
+                "Thrown into the dungeon of his castle to rot, you plot an escape.\n" +
+                "One day, a large explosion rock the castle, rubble falling into your chamber. \n" +
+                "The force has knocked loose the cage door from the stone!\n" +
+                "This is your chance!\n" +
+                "Onward brave hero!";
+        String charaInfo = "Name:        " + GameLogic.player.name +"    HP:      " + GameLogic.player.hp + "     XP:         " + GameLogic.player.xp;
+        textArea.setText(text);
+        textArea.setEditable(false);
+        loopPanel.setVisible(true);
+        characterInfo.setText(charaInfo);
         
         
             }//GEN-LAST:event_yesBtnNewActionPerformed
@@ -1292,8 +1286,8 @@ public class GUI extends javax.swing.JFrame {
         t = Map.getRoomDesc(roomNo);
         }
         textArea.setText(t);
-        String l = "Name: " + GameLogic.player.name + "     HP: " + GameLogic.player.hp +"      XP: " + GameLogic.player.xp;
-        characterInfo.setText(l);
+        String label = "Name: " + pc.name + "     HP: " + pc.hp +"      XP: " + pc.xp;
+        characterInfo.setText(label);
     }
     
     public void battleStart() {

@@ -39,10 +39,7 @@ public class GameLogic implements Runnable {
             
     }
     
-    public static void setPlayer(String name) throws SQLException{
-        player = new Player(name);
-    }
- 
+    
     
     public static void Start() throws SQLException{
 
