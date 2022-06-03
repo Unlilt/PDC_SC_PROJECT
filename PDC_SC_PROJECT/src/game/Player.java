@@ -61,8 +61,6 @@ public class Player extends Character{
             insertIntoDb(name);
         }
        
-            
-        
         db.closeConnections();
         }
 
@@ -78,6 +76,7 @@ public class Player extends Character{
         if(this.hp > this.maxHP){
             rest+="Your hp is restored to max!";
             this.hp = this.getMaxHP();
+                    g.textArea.setText(rest);
 
         }
         else{

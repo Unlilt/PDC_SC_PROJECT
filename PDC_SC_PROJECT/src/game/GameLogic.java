@@ -25,6 +25,10 @@ public class GameLogic implements Runnable {
     static Player player;
     public static boolean isRunning;
     public static GUI gameGui;
+
+    static Player getPlayer() {
+        return player;
+    }
     
     public GameLogic(){
               gameGui = new GUI();
@@ -39,7 +43,9 @@ public class GameLogic implements Runnable {
             
     }
     
-    
+    public static void setPlayer(String pc) throws SQLException{
+        player = new Player(pc);
+    }
     
     public static void Start() throws SQLException{
 

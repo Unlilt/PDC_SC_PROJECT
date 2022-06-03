@@ -98,7 +98,7 @@ public class GUI extends javax.swing.JFrame {
         yesBtnSaveRestart = new javax.swing.JButton();
         noBtnRestartSave = new javax.swing.JButton();
         bossBattlePanel = new javax.swing.JPanel();
-        playerStatsBoss = new java.awt.Label();
+        playerStats1 = new java.awt.Label();
         bossFightBtn = new javax.swing.JButton();
         bossRunBtn = new javax.swing.JButton();
         battleEndedContinueBtn1 = new javax.swing.JButton();
@@ -703,7 +703,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(154, Short.MAX_VALUE))
         );
 
-        playerStatsBoss.setText("label1");
+        playerStats1.setText("label1");
 
         bossFightBtn.setText("Fight");
         bossFightBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -736,7 +736,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(bossBattlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bossBattlePanelLayout.createSequentialGroup()
                         .addGap(90, 90, 90)
-                        .addComponent(playerStatsBoss, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(playerStats1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bossBattlePanelLayout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addComponent(bossFightBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -756,7 +756,7 @@ public class GUI extends javax.swing.JFrame {
             bossBattlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bossBattlePanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(playerStatsBoss, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(playerStats1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bossBattleText, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
@@ -954,15 +954,13 @@ public class GUI extends javax.swing.JFrame {
         //get name from text area          
         name = charaNameInput.getText();
         try {
-            Player player = new Player(name);
-
             if(Player.ifPlayerExists(name))
             {
                 newGame.setVisible(false);
                 verifyLoad.setVisible(true);
             } else 
             {
-               GameLogic.player = pc;
+                GameLogic.setPlayer(name);
                 newGame.setVisible(false);
                 setLoopPanel();           
                 loopPanel.setVisible(true);
@@ -983,15 +981,12 @@ public class GUI extends javax.swing.JFrame {
 
     private void contBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contBtn1ActionPerformed
         
-        String name = charaNameInput1.getText();
+        name = charaNameInput1.getText();
         try {
-            pc = new Player(name);
-
             if(!Player.ifPlayerExists(name)){
                 
-                GameLogic.player = pc;
-                pc = GameLogic.player;
-                    
+                GameLogic.setPlayer(name);
+
             }
             else{
                 confirmLoad();
@@ -999,7 +994,6 @@ public class GUI extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         };
-      
         pc = GameLogic.player;
         loadGame.setVisible(false);
         setLoopPanel();
@@ -1036,20 +1030,26 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_yesBtnLoadActionPerformed
 
     private void yesBtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesBtnNewActionPerformed
-        String name = charaNameInput.getText();
-        GameLogic.player = pc;
-        //start with intro
-        String text = "You are a brave hero who has been captured by the evil emperor Gnosis! \n" +
-                "Thrown into the dungeon of his castle to rot, you plot an escape.\n" +
-                "One day, a large explosion rock the castle, rubble falling into your chamber. \n" +
-                "The force has knocked loose the cage door from the stone!\n" +
-                "This is your chance!\n" +
-                "Onward brave hero!";
-        String charaInfo = "Name:        " + GameLogic.player.name +"    HP:      " + GameLogic.player.hp + "     XP:         " + GameLogic.player.xp;
-        textArea.setText(text);
-        textArea.setEditable(false);
-        loopPanel.setVisible(true);
-        characterInfo.setText(charaInfo);
+        try {
+            String name = charaNameInput.getText();
+            GameLogic.setPlayer(name);
+            
+            //start with intro
+            String text = "You are a brave hero who has been captured by the evil emperor Gnosis! \n" +
+                    "Thrown into the dungeon of his castle to rot, you plot an escape.\n" +
+                    "One day, a large explosion rock the castle, rubble falling into your chamber. \n" +
+                    "The force has knocked loose the cage door from the stone!\n" +
+                    "This is your chance!\n" +
+                    "Onward brave hero!";
+            String charaInfo = "Name:        " + GameLogic.player.name +"    HP:      " + GameLogic.player.hp + "     XP:         " + GameLogic.player.xp;
+            textArea.setText(text);
+            textArea.setEditable(false);
+            loopPanel.setVisible(true);
+            
+            characterInfo.setText(charaInfo);
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
             }//GEN-LAST:event_yesBtnNewActionPerformed
@@ -1079,18 +1079,16 @@ public class GUI extends javax.swing.JFrame {
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
        //move to save panel
-       loopPanel.setVisible(false);
+        loopPanel.setVisible(false);
        saveGame.setVisible(true);
        contBtnSave.setVisible(false);
        saveText.setVisible(true);
-        yesBtnSave.setVisible(true);
-                noBtnSave.setVisible(true);
         
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void yesBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesBtnSaveActionPerformed
         try {
-            if((Player.ifPlayerExists(GameLogic.player.name))){
+            if((Player.ifPlayerExists(name))){
                 String overwrite = "You have an existing save. Overwrite it?";
                 saveText.setText(overwrite);
                 yesBtnSave.setVisible(true);
@@ -1104,7 +1102,6 @@ public class GUI extends javax.swing.JFrame {
         }
          yesBtnSave.setVisible(false);
         noBtnSave.setVisible(false);
-        contBtnSave.setVisible(true);
     }//GEN-LAST:event_yesBtnSaveActionPerformed
 
     private void contBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contBtnSaveActionPerformed
@@ -1242,7 +1239,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton noBtnRestartSave;
     protected javax.swing.JButton noBtnSave;
     protected java.awt.Label playerStats;
-    protected java.awt.Label playerStatsBoss;
+    protected java.awt.Label playerStats1;
     private javax.swing.JButton restartBtn;
     private javax.swing.JPanel restartPanel;
     protected javax.swing.JButton runBtn;
@@ -1272,8 +1269,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void setLoopPanel() {
 //        updatePc();
-        pc = GameLogic.player;
-        int roomNo = pc.roomCount;
+        int roomNo = GameLogic.player.roomCount;
         String t;
         if(roomNo == 0){
             t = "You are a brave hero who has been captured by the evil emperor Gnosis! \n" +
@@ -1286,8 +1282,8 @@ public class GUI extends javax.swing.JFrame {
         t = Map.getRoomDesc(roomNo);
         }
         textArea.setText(t);
-        String label = "Name: " + pc.name + "     HP: " + pc.hp +"      XP: " + pc.xp;
-        characterInfo.setText(label);
+        String l = "Name: " + GameLogic.player.name + "     HP: " + GameLogic.player.hp +"      XP: " + GameLogic.player.xp;
+        characterInfo.setText(l);
     }
     
     public void battleStart() {
@@ -1297,10 +1293,10 @@ public class GUI extends javax.swing.JFrame {
     }
     
     public void bossBattle() {
-        playerStatsBoss.setText("Name: "+GameLogic.player.name + "   HP: " + GameLogic.player.hp);
+        
         String bossIntro = "This is it.\n";
-        bossIntro+="The final battle\n";
-        bossBattleText.setText(bossIntro);
+       bossIntro+="The final battle\n";
+       bossBattleText.setText(bossIntro);
         loopPanel.setVisible(false);
         battleEndedContinueBtn1.setVisible(false);
         bossBattlePanel.setVisible(true);
