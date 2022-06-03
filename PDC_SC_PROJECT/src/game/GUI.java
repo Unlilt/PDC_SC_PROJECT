@@ -1083,6 +1083,8 @@ public class GUI extends javax.swing.JFrame {
        saveGame.setVisible(true);
        contBtnSave.setVisible(false);
        saveText.setVisible(true);
+       yesBtnSave.setVisible(true);
+        noBtnSave.setVisible(true);
         
     }//GEN-LAST:event_saveBtnActionPerformed
 
@@ -1091,8 +1093,7 @@ public class GUI extends javax.swing.JFrame {
             if((Player.ifPlayerExists(name))){
                 String overwrite = "You have an existing save. Overwrite it?";
                 saveText.setText(overwrite);
-                yesBtnSave.setVisible(true);
-                noBtnSave.setVisible(true);
+                
             }
             else{
                 SaveGame.saveGame(GameLogic.player);
@@ -1132,7 +1133,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void bossFightBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bossFightBtnActionPerformed
         // TODO add your handling code here:
-                Battle.finalBattle(GameLogic.player);
+                Battle.finalPlayerAttack(GameLogic.player);
 
     }//GEN-LAST:event_bossFightBtnActionPerformed
 

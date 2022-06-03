@@ -43,10 +43,10 @@ public class SaveGameTest {
     @Test
     public void testSaveGame() throws Exception {
         System.out.println("saveGame");
-        Player pc = new Player("Test");
+        Player pc = new Player("Maria");
+        pc.roomCount = 4;
         SaveGame.saveGame(pc);
         // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
     }
     
 }
