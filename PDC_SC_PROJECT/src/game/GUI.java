@@ -334,6 +334,11 @@ public class GUI extends javax.swing.JFrame {
         });
 
         runBtn.setText("Run");
+        runBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                runBtnActionPerformed(evt);
+            }
+        });
 
         battleEndedContinueBtn.setLabel("Continue");
         battleEndedContinueBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -1158,6 +1163,19 @@ public class GUI extends javax.swing.JFrame {
         titlePanel.setVisible(true);
     }//GEN-LAST:event_finalRestartBtnActionPerformed
 
+    private void runBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runBtnActionPerformed
+       boolean escaped = Battle.escape(GameLogic.player);
+       if(escaped){
+           battleText.setText("Successfully escaped!");
+           fightBtn.setVisible(false);
+           runBtn.setVisible(false);
+           battleEndedContinueBtn.setVisible(true);
+           
+       }
+        
+        
+    }//GEN-LAST:event_runBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1295,8 +1313,8 @@ public class GUI extends javax.swing.JFrame {
     
     public void bossBattle() {
         
-        String bossIntro = "This is it.\n";
-       bossIntro+="The final battle\n";
+        String bossIntro = "This is it.";
+       bossIntro+="The final battle";
        bossBattleText.setText(bossIntro);
         loopPanel.setVisible(false);
         battleEndedContinueBtn1.setVisible(false);
@@ -1307,11 +1325,8 @@ public class GUI extends javax.swing.JFrame {
 
         //print final story lines
     public  void finale() {
-        String finale = "The Evil Emperor falls to his knees, defeated. You stand above him, sword raised.\n"+
-        "As you swing down, the moon shines off your blade, blinding you momentairily. \nThe Evil Emperor raises his hand and you are sent flying back."+
-       "He stands and laughs. The robes wrap around him and when you blink again, he is gone.\n"+
-        "Congratualtions, you beat the emperor!\n"+
-        "The kingdom is safe once more...but for how long?";
+        String finale = "You deal the final blow! The emperor is no more!";
+        bossBattleText.setText(finale);
         battleEndedContinueBtn1.setVisible(true);
         
     }

@@ -65,25 +65,28 @@ public class Battle {
 
      }
      
-     public static void escape(){
-//                    GameLogic.clearConsole();
-//                   int escapeChance = rand.nextInt(100);
-//                   //success
-//                   if(escapeChance > 50){
-//                       System.out.println("You successfully escaped!");
-//                       battle = false;
-//                   }
-//                   //fail
-//                   else{
-//                       System.out.println("You cannot escape!");
-//                       dmgTaken = attack();
-//                        System.out.println("The enemy dealt " + dmgTaken + " damage to you!");
-//                        player.hp -= dmgTaken;
-//                        GameLogic.anyKeyToContinue();
-//                        if(player.getHp() <= 0){
-//                       Player.death(enemy.getName());
-//                       battle = false;
-//                   }
+     public static boolean  escape(Player player){
+                 g = GameLogic.gameGui;
+
+                   int escapeChance = rand.nextInt(100);
+                   //success
+                   if(escapeChance > 50){
+                       System.out.println("You successfully escaped!");
+                       return true;
+                   }
+                   //fail
+                   else{
+                       String dmg ="You cannot escape!";
+                      int dmgTaken = attack();
+                        dmg += "The enemy dealt " + dmgTaken + " damage to you!";
+                        g.battleText.setText(dmg);
+                        player.hp -= dmgTaken;
+                        if(player.getHp() <= 0){
+                       Player.death(opp.getName());
+                      return false;
+                   }
+                    }
+                   return false;
      }
     public static int attack() {
         int dmg = new Random().nextInt(15) + 1;
@@ -108,7 +111,9 @@ public class Battle {
            }
 
     static void finalPlayerAttack(Player player) {
-    int dmgDealt = attack();
+           String pcStats =  player.name + " HP: " + player.getHp();
+           g.playerStats.setText(pcStats);
+            int dmgDealt = attack();
                     Gnosis.hp -= dmgDealt;
                    int dmgTaken = bossAttack();
                    player.hp -= dmgTaken;
@@ -118,7 +123,6 @@ public class Battle {
                    //if player beats emperor
                    if(Gnosis.hp <= 0)
                    {
-                       System.out.println("You have defeated the " + Gnosis.getName() +"! You gained " + Gnosis.getXp() + "xp points!");
                        //Play final boss winning story
                        g.finale();
                        player.win(player, Gnosis.getXp());

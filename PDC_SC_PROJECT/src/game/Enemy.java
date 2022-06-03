@@ -16,9 +16,7 @@ public class Enemy extends Character {
     }
 
     static Enemy summonMonster(String enemy) {
-        System.out.println("A " + enemy + " appears! You must fight them to pass!");
-        System.out.println("The battle begins!");
-        
+             
         //create enemy number from randomized enemyarray in GL
         Enemy monster = null;
         switch(enemy){
