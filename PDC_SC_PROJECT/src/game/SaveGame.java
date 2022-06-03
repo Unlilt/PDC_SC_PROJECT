@@ -72,6 +72,8 @@ public class SaveGame {
             pstmt.setInt(1, pc.hp);
             pstmt.setInt(2, pc.maxHP);
             pstmt.setInt(3, pc.roomCount);
+            System.out.println(pc.roomCount);
+
             pstmt.setInt(4, pc.xp);
             pstmt.setString(5, pc.name);
         }
@@ -88,6 +90,7 @@ public class SaveGame {
            pstmt.setInt(2, pc.hp);
            pstmt.setInt(3, pc.maxHP);
            pstmt.setInt(4, pc.roomCount);
+            System.out.println(pc.roomCount);
            pstmt.setInt(5, pc.xp);
            pstmt.execute();
         }

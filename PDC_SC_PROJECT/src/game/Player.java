@@ -50,7 +50,7 @@ public class Player extends Character{
        super(name, 100, 0, "Player");
        this.roomCount = 0;
         db = new DBManager();
-        conn = db.getConnection();
+        
         
         
         if(!db.ifTableExists("PLAYER")){
@@ -58,14 +58,11 @@ public class Player extends Character{
         }
       
         if(!ifPlayerExists(name)){
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO PLAYER (NAME, HP, MAXHP, XP, ROOMNO) VALUES(?,100,100, 0, 0)");
-            stmt.setString(1, name.toUpperCase());
-            stmt.execute();
-            stmt.close();
+            insertIntoDb(name);
         }
        
             
-        conn.close();
+        
         db.closeConnections();
         }
 
@@ -108,6 +105,19 @@ public class Player extends Character{
      ResultSet rs = stmt.executeQuery();
      
         return rs.next();
+    }
+
+    private void insertIntoDb(String name) throws SQLException {
+        db = new DBManager();
+        conn = db.getConnection();
+        
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO PLAYER (NAME, HP, MAXHP, XP, ROOMNO) VALUES(?,100,100, 0, 0)");
+            stmt.setString(1, name.toUpperCase());
+            stmt.execute();
+            stmt.close();    
+    
+            conn.close();
+        db.closeConnections();
     }
     
 }
