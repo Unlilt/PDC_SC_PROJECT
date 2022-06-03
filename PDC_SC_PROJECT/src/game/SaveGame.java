@@ -5,13 +5,9 @@
  */
 package game;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Jade Thompson-Tavai
@@ -23,38 +19,6 @@ public class SaveGame {
     public static DBManager db;
     public static Connection conn;
     
-//     static boolean  savePrompt(Player player) throws SQLException {
-//         g = GameLogic.gameGui;
-//         db = new DBManager();
-//         conn = db.getConnection();
-//          String name = player.getName();
-//      
-//         if((Player.ifPlayerExists(name))){
-//                String overwrite = "You have an existing save. Overwrite it?";
-//                System.out.println(overwrite);
-//                g.saveText.setVisible(true);
-//                g.yesBtnSave.setVisible(true);
-//                g.noBtnSave.setVisible(true);
-//
-//            
-//     
-//         return true;
-//            }
-//         else{
-////                    saveInfoInitialize(player);
-//                                saveGame(player); 
-//                                System.out.println("Thanks for Playing!");
-//                                GameLogic.isRunning = false;
-//                                 conn.close();
-//         db.closeConnections();
-//}
-//         return false;
-//        
-//    }
-
-
-
-
       protected static synchronized void saveGame(Player pc) throws SQLException {
        
         db = new DBManager();
